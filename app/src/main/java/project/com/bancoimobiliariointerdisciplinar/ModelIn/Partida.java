@@ -1,4 +1,4 @@
-package project.com.bancoimobiliariointerdisciplinar.Model;
+package project.com.bancoimobiliariointerdisciplinar.ModelIn;
 
 import android.arch.persistence.room.Entity;
 

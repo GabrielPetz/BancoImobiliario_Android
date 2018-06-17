@@ -1,12 +1,14 @@
-package project.com.bancoimobiliariointerdisciplinar.Model;
+package project.com.bancoimobiliariointerdisciplinar.ModelIn;
 
 import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.PrimaryKey;
 
 /**
  * Created by User on 25/04/2018.
  */
 @Entity
 public class Propriedade {
+    @PrimaryKey
     private Integer proid;
     private String prolote;
     private Integer procasa;
@@ -17,6 +19,8 @@ public class Propriedade {
     private Double provaloraluguel3;
     private Double provaloraluguel4;
     private Double provaloraluguelhotel;
+    private Integer prostatus;
+
 
     public  Propriedade(){
         this.proid = null;
