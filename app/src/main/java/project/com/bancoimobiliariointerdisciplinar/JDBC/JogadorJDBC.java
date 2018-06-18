@@ -4,17 +4,15 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-import java.util.List;
 
 import android.content.Context;
-import android.database.sqlite.SQLiteException;
 
 import project.com.bancoimobiliariointerdisciplinar.Factory.DatabaseFactory;
-import project.com.bancoimobiliariointerdisciplinar.Interface.IJogador;
 import project.com.bancoimobiliariointerdisciplinar.ModelIn.Jogador;
+import project.com.bancoimobiliariointerdisciplinar.ModelOut.JogadorOut;
 import project.com.bancoimobiliariointerdisciplinar.Util.BancoStatitcs;
 
-public class JogadorJDBC implements IJogador {
+public class JogadorJDBC {
 
 
     private SQLiteDatabase db;
@@ -25,21 +23,19 @@ public class JogadorJDBC implements IJogador {
     }
 
 
-
-    @Override
-    public Jogador getJogador(Integer id) {
+    public JogadorOut getJogador(Integer id) {
 
         Cursor cur;
 
         String[] campos = {"jogid", "jognome", "jognick"};
         db = banco.getReadableDatabase();
 
-        String where = "jognome=" + id + " ";
+        String where = "jognome=" + id + " and jogstatus = 1";
 
         cur = db.query(BancoStatitcs.TABELA_JOGADOR, campos, where, null, null, null, null);
 
 
-        Jogador jog = new Jogador();
+        JogadorOut jog = new JogadorOut();
 
 
         if (cur != null) {
@@ -54,8 +50,7 @@ public class JogadorJDBC implements IJogador {
 
     }
 
-    @Override
-    public Jogador getJogador(String nome) {
+    public JogadorOut getJogador(String nome) {
         Cursor cur;
 
         String[] campos = {"jogid", "jognome", "jognick"};
@@ -66,7 +61,7 @@ public class JogadorJDBC implements IJogador {
         cur = db.query(BancoStatitcs.TABELA_JOGADOR, campos, where, null, null, null, null);
 
 
-        Jogador jog = new Jogador();
+        JogadorOut jog = new JogadorOut();
 
 
         if (cur != null) {
@@ -80,10 +75,7 @@ public class JogadorJDBC implements IJogador {
         return jog;
     }
 
-    @Override
     public Long insertJogador(Jogador jogador) {
-
-        Integer id;
 
         long res;
 
@@ -103,7 +95,6 @@ public class JogadorJDBC implements IJogador {
         return res;
     }
 
-    @Override
     public Integer updateJogador(Jogador jogador) {
 
         ContentValues val = new ContentValues();
@@ -113,22 +104,14 @@ public class JogadorJDBC implements IJogador {
         val.put("jognick", jogador.getJognick());
         val.put("jognome", jogador.getJognome());
 
-        String where  = "jogid=" + jogador.getJogid();
+        String where = "jogid=" + jogador.getJogid();
 
         int res = db.update("jogador", val, where, null);
-
-
-
-        db.execSQL("update public.jogador  set jognome='" + jogador.getJognome() + "' " +
-                "set jognick='" + jogador.getJognick() + "' " +
-                "where jogid=" + jogador.getJogid());
 
         return res;
     }
 
-
-    @Override
-    public Integer updateSenha(Integer id, String newPassword){
+    public Integer updateSenha(Integer id, String newPassword) {
 
         db = banco.getWritableDatabase();
 
@@ -136,18 +119,16 @@ public class JogadorJDBC implements IJogador {
 
         val.put("jogsenha", newPassword);
 
-        int res = db.update("jogador", val, "jogid = "+id, null);
+        int res = db.update("jogador", val, "jogid = " + id, null);
 
         return res;
     }
 
+    public void deleteJogador(Integer id) {
 
-    @Override
-    public void deleteJogador(Integer id){
+        db = banco.getWritableDatabase();
 
-        db = banco.getReadableDatabase();
-
-        db.execSQL("delete from jogador where jogid = " + id);
+        db.delete("jogador" , "jogid = " + id, null);
 
     }
 }

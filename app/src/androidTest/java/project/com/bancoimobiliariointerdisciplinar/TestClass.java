@@ -14,12 +14,12 @@ import project.com.bancoimobiliariointerdisciplinar.ModelIn.Jogador;
 @RunWith(AndroidJUnit4.class)
 public class TestClass {
 
-    private static IJogador ijogador;
+    private static Context appContext = InstrumentationRegistry.getTargetContext();
 
-    private static JogadorJDBC jogadorJDBC;
+    private static JogadorJDBC jogadorJDBC = new JogadorJDBC(appContext);
 
     @Test
-    public void test_insertjogador(){
+    public void test_insertjogador() {
 
         Context appContext = InstrumentationRegistry.getTargetContext();
 
@@ -29,21 +29,21 @@ public class TestClass {
         jog.setJognick("rootplayer");
         jog.setJogsenha("rootpassword");
 
-        ijogador.insertJogador(jog);
+        jogadorJDBC.insertJogador(jog);
 
     }
 
     @Test
-    public void test_getjogadornick(){
+    public void test_getjogadornick() {
 
         Context appContext = InstrumentationRegistry.getTargetContext();
 
-        ijogador.getJogador(10);
+        jogadorJDBC.getJogador(10);
 
     }
 
     @Test
-    public void test_alterJogador(){
+    public void test_alterJogador() {
 
         Context appContext = InstrumentationRegistry.getTargetContext();
 
@@ -53,31 +53,30 @@ public class TestClass {
         jog.setJognome("root");
         jog.setJognick("root");
 
-        ijogador.updateJogador(jog);
+        jogadorJDBC.updateJogador(jog);
     }
 
     @Test
-    public void test_getjogadornome()
-    {
+    public void test_getjogadornome() {
 
         Context appContext = InstrumentationRegistry.getTargetContext();
 
-        ijogador.getJogador("root");
+        jogadorJDBC.getJogador("root");
 
     }
 
     @Test
-    public void test_updatesenha(){
+    public void test_updatesenha() {
         Context appContext = InstrumentationRegistry.getTargetContext();
 
-        ijogador.updateSenha(10,"newrootpasswd");
+        jogadorJDBC.updateSenha(10, "newrootpasswd");
     }
 
     @Test
-    public void test_deletejogador(){
+    public void test_deletejogador() {
         Context appContext = InstrumentationRegistry.getTargetContext();
 
-        ijogador.deleteJogador(10);
+        jogadorJDBC.deleteJogador(10);
     }
 
 

@@ -2,6 +2,7 @@ package project.com.bancoimobiliariointerdisciplinar.ModelIn;
 
 import android.arch.persistence.room.Entity;
 
+import java.time.LocalDate;
 import java.time.OffsetDateTime;
 
 /**
@@ -11,10 +12,10 @@ import java.time.OffsetDateTime;
 public class Partida {
     private Integer parid;
     private String parnome;
-    private OffsetDateTime pardata;
+    private LocalDate pardata;
     private Integer parstatus;
 
-    public Partida(String parnome, OffsetDateTime pardata, Integer parstatus) {
+    public Partida(String parnome, LocalDate pardata, Integer parstatus) {
         this.parnome = parnome;
         this.pardata = pardata;
         this.parstatus = parstatus;
@@ -43,11 +44,11 @@ public class Partida {
         this.parnome = parnome;
     }
 
-    public OffsetDateTime getPardata() {
+    public LocalDate getPardata() {
         return pardata;
     }
 
-    public void setPardata(OffsetDateTime pardata) {
+    public void setPardata(LocalDate pardata) {
         this.pardata = pardata;
     }
 
