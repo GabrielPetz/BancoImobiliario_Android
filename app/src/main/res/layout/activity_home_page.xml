@@ -4,15 +4,31 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="project.com.bancoimobiliariointerdisciplinar.Activity.HomePageActivity">
 
     <TextView
-        android:layout_width="wrap_content"
+        android:textSize="25sp"
+        android:id="@+id/jogadorLogado"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+<Button
+    android:id="@+id/eraser"
+    android:onClick="eraseData"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="Erase All Data"
+    android:clickable="true"/>
+
+    <Button
+        android:id="@+id/doPartida"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:text="Nova Partida"
+        android:layout_marginTop="20dp"
+        android:onClick="goPartida"
+        />
+
 
 </LinearLayout>

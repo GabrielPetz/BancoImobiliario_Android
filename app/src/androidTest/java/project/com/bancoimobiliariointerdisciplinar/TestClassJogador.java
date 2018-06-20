@@ -4,20 +4,20 @@ import android.content.Context;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.runner.AndroidJUnit4;
 
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import project.com.bancoimobiliariointerdisciplinar.Interface.IJogador;
 import project.com.bancoimobiliariointerdisciplinar.JDBC.JogadorJDBC;
 import project.com.bancoimobiliariointerdisciplinar.ModelIn.Jogador;
 
 @RunWith(AndroidJUnit4.class)
-public class TestClass {
+public class TestClassJogador {
 
     private static Context appContext = InstrumentationRegistry.getTargetContext();
 
     private static JogadorJDBC jogadorJDBC = new JogadorJDBC(appContext);
-
+    @Ignore
     @Test
     public void test_insertjogador() {
 
@@ -32,16 +32,16 @@ public class TestClass {
         jogadorJDBC.insertJogador(jog);
 
     }
-
+    @Ignore
     @Test
     public void test_getjogadornick() {
 
         Context appContext = InstrumentationRegistry.getTargetContext();
 
-        jogadorJDBC.getJogador(10);
+        jogadorJDBC.getJogador(1);
 
     }
-
+    @Ignore
     @Test
     public void test_alterJogador() {
 
@@ -49,13 +49,13 @@ public class TestClass {
 
         Jogador jog = new Jogador();
 
-        jog.setJogid(10);
+        jog.setJogid(1);
         jog.setJognome("root");
         jog.setJognick("root");
 
         jogadorJDBC.updateJogador(jog);
     }
-
+    @Ignore
     @Test
     public void test_getjogadornome() {
 
@@ -64,19 +64,19 @@ public class TestClass {
         jogadorJDBC.getJogador("root");
 
     }
-
+    @Ignore
     @Test
     public void test_updatesenha() {
         Context appContext = InstrumentationRegistry.getTargetContext();
 
-        jogadorJDBC.updateSenha(10, "newrootpasswd");
+        jogadorJDBC.updateSenha(1, "newrootpasswd");
     }
-
+    @Ignore
     @Test
     public void test_deletejogador() {
         Context appContext = InstrumentationRegistry.getTargetContext();
 
-        jogadorJDBC.deleteJogador(10);
+        jogadorJDBC.deleteJogador(1);
     }
 
 

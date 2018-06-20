@@ -29,8 +29,8 @@ public class DatabaseFactory extends SQLiteOpenHelper {
         sql = "create table partida (" +
                 "parid integer primary key autoincrement," +
                 "parnome varchar(100)," +
-                "pardata timestamp," +
-                "parstatus numeric(5)" +
+                "pardata varchar(100)," +
+                "parstatus numeric(5) default 1" +
                 ");";
         db.execSQL(sql);
 
@@ -70,20 +70,35 @@ public class DatabaseFactory extends SQLiteOpenHelper {
 
 
         sql = "create table jogadorpartida(" +
-                "jpaid integer primary key autoincrement," +
                 "jpajogador integer not null," +
                 "jpapartida integer not null," +
-                "jpapino integer not null" +
+                "jpapino integer not null," +
+                "foreign key (jpajogador) references jogador (jogid)," +
+                "foreign key (jpapartida) references partida (parid)," +
+                "foreign key (jpapino) references pino (pinid)" +
                 ")";
         db.execSQL(sql);
 
         sql = "create table jogada(" +
                 "jgajogador integer not null ," +
                 "jgapartida integer not null," +
+                "jgapino integer not null," +
                 "jgapropriedade integer not null," +
-                "jgaoperacao integer not null" +
+                "jgaoperacao integer not null," +
+                "foreign key (jgajogador) references jogadorpartida (jpajogador)," +
+                "foreign key (jgapartida) references jogadorpartida (jpapartida)," +
+                "foreign key (jgapino) references jogadorpartida (jpapino)," +
+                "foreign key (jgapropriedade) references propriedade (proid)," +
+                "foreign key (jgaoperacao) references operacao (opeid)" +
                 ")";
         db.execSQL(sql);
+
+        sql = "insert into jogador values(1, 'root','root', 'root')";
+        db.execSQL(sql);
+
+        sql = "insert into partida values(1, 'root','19-06-2018', 1)";
+        db.execSQL(sql);
+
     }
 
     @Override

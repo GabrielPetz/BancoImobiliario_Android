@@ -54,7 +54,7 @@ public class PartidaJDBC {
 
         String[] campos = {"parid", "parnome", "pardata", "parstatus"};
 
-        String where = "parnome = " + nome;
+        String where = "parnome = '" + nome + "'";
 
         db = banco.getReadableDatabase();
 
@@ -116,6 +116,12 @@ public class PartidaJDBC {
         val.put("parstatus", 0);
         db.update("partida", val, "parid = " + id, null);
 
+    }
+
+    public void eraseData(){
+        db = banco.getWritableDatabase();
+
+        db.delete("partida", null, null);
     }
 
 }

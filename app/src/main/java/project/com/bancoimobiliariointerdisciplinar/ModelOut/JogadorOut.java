@@ -13,11 +13,7 @@ public class JogadorOut {
     private Integer jogstatus;
 
     public JogadorOut() {
-        this.jogid = null;
-        this.jognome = null;
-        this.jogsenha = null;
-        this.jognick = null;
-        this.jogstatus = null;
+
     }
 
 
@@ -29,6 +25,15 @@ public class JogadorOut {
         this.jogstatus = jogstatus;
     }
 
+    @Override
+    public String toString() {
+        return "JogadorOut{" +
+                "jogid=" + jogid +
+                ", jognome='" + jognome + '\'' +
+                ", jogsenha='" + jogsenha + '\'' +
+                ", jognick='" + jognick + '\'' +
+                '}';
+    }
 
     public Integer getJogid() {
         return jogid;

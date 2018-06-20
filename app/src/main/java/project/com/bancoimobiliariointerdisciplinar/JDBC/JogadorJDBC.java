@@ -23,6 +23,27 @@ public class JogadorJDBC {
     }
 
 
+    public JogadorOut doLogin(String nick, String password){
+        Cursor cur;
+
+        JogadorOut jog =  new JogadorOut();
+        String[] campos = {"jogid", "jognome", "jognick"};
+        db = banco.getReadableDatabase();
+        String where = "jognick='" + nick + "' and jogsenha='" + password + "'";
+
+        cur = db.query(BancoStatitcs.TABELA_JOGADOR, campos, where, null, null, null, null);
+
+        if (cur.getCount() > 0) {
+            cur.moveToFirst();
+            jog.setJogid(cur.getInt(cur.getColumnIndexOrThrow("jogid")));
+            jog.setJognick(cur.getString(cur.getColumnIndexOrThrow("jognick")));
+            jog.setJognome(cur.getString(cur.getColumnIndexOrThrow("jognome")));
+        }
+        db.close();
+
+        return jog;
+    }
+
     public JogadorOut getJogador(Integer id) {
 
         Cursor cur;
@@ -30,7 +51,7 @@ public class JogadorJDBC {
         String[] campos = {"jogid", "jognome", "jognick"};
         db = banco.getReadableDatabase();
 
-        String where = "jognome=" + id + " and jogstatus = 1";
+        String where = "jogid=" + id + " ";
 
         cur = db.query(BancoStatitcs.TABELA_JOGADOR, campos, where, null, null, null, null);
 
@@ -38,7 +59,7 @@ public class JogadorJDBC {
         JogadorOut jog = new JogadorOut();
 
 
-        if (cur != null) {
+        if (cur.getCount() > 0) {
             cur.moveToFirst();
             jog.setJogid(cur.getInt(cur.getColumnIndexOrThrow("jogid")));
             jog.setJognick(cur.getString(cur.getColumnIndexOrThrow("jognick")));
@@ -50,13 +71,13 @@ public class JogadorJDBC {
 
     }
 
-    public JogadorOut getJogador(String nome) {
+    public JogadorOut getJogador(String nick) {
         Cursor cur;
 
         String[] campos = {"jogid", "jognome", "jognick"};
         db = banco.getReadableDatabase();
 
-        String where = "jognome like '" + nome + "'";
+        String where = "jognick like '" + nick + "'";
 
         cur = db.query(BancoStatitcs.TABELA_JOGADOR, campos, where, null, null, null, null);
 
@@ -64,7 +85,7 @@ public class JogadorJDBC {
         JogadorOut jog = new JogadorOut();
 
 
-        if (cur != null) {
+        if (cur.getCount() > 0 ) {
             cur.moveToFirst();
             jog.setJogid(cur.getInt(cur.getColumnIndexOrThrow("jogid")));
             jog.setJognick(cur.getString(cur.getColumnIndexOrThrow("jognick")));
@@ -87,7 +108,6 @@ public class JogadorJDBC {
         val.put("jognome", jogador.getJognome());
         val.put("jogsenha", jogador.getJogsenha());
         val.put("jognick", jogador.getJognick());
-        val.put("jogstatus", 1);
 
         res = db.insert(BancoStatitcs.TABELA_JOGADOR, null, val);
         db.close();
@@ -131,4 +151,13 @@ public class JogadorJDBC {
         db.delete("jogador" , "jogid = " + id, null);
 
     }
+
+
+    public int eraseData(){
+        db = banco.getReadableDatabase();
+        int res;
+
+        return res =db.delete("jogador" , null, null);
+    }
+
 }

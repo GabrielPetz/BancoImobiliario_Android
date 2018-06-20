@@ -4,6 +4,7 @@ import android.arch.persistence.room.Entity;
 
 import java.time.LocalDate;
 import java.time.OffsetDateTime;
+import java.util.Date;
 
 /**
  * Created by User on 25/04/2018.
@@ -12,10 +13,10 @@ import java.time.OffsetDateTime;
 public class Partida {
     private Integer parid;
     private String parnome;
-    private LocalDate pardata;
+    private Date pardata;
     private Integer parstatus;
 
-    public Partida(String parnome, LocalDate pardata, Integer parstatus) {
+    public Partida(String parnome, Date pardata, Integer parstatus) {
         this.parnome = parnome;
         this.pardata = pardata;
         this.parstatus = parstatus;
@@ -44,11 +45,11 @@ public class Partida {
         this.parnome = parnome;
     }
 
-    public LocalDate getPardata() {
+    public Date getPardata() {
         return pardata;
     }
 
-    public void setPardata(LocalDate pardata) {
+    public void setPardata(Date pardata) {
         this.pardata = pardata;
     }
 
